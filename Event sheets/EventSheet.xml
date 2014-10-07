@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>EventSheet</name>
+    <events>
+        <event-group description="Hace que tonto grande siga al jugador sin importar que" sid="5746921369808255" title="BigEnemyFollow">
+            <sub-events>
+                <event-block sid="2426501245602217">
+                    <conditions>
+                        <condition behavior="LineOfSight" id="0" name="Has LOS to object" sid="883614955642844" type="BigEnemy">
+                            <param id="0" name="Object">Player</param>
+                        </condition>
+                        <condition id="-6" name="Every X seconds" sid="9418510246172268" type="System">
+                            <param id="0" name="Interval (seconds)">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Pathfinding" id="0" name="Find path" sid="2226405571989204" type="BigEnemy">
+                            <param id="0" name="X">Player.X</param>
+                            <param id="1" name="Y">Player.Y</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="9746402510853388" type="Player">
+                            <param id="0" name="Opacity">50</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8111549136780547">
+                    <conditions>
+                        <condition behavior="Pathfinding" id="0" name="On path found" sid="2304862430578426" type="BigEnemy" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Pathfinding" id="1" name="Move along path" sid="7925667074420578" type="BigEnemy" />
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+    </events>
+</c2eventsheet>
