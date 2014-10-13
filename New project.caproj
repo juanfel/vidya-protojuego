@@ -10,13 +10,18 @@
     <unique-id>1l7p45wwkuue6</unique-id>
     <saved-with-version>17800</saved-with-version>
     <used-plugins>
+        <plugin author="Scirra" id="Keyboard" version="1">Keyboard</plugin>
         <plugin author="Scirra" id="Mouse" version="1">Mouse</plugin>
         <plugin author="Scirra" id="Sprite" version="1">Sprite</plugin>
+        <plugin author="Scirra" id="Text" version="1">Text</plugin>
+        <plugin author="Scirra" id="Tilemap" version="1">Tilemap</plugin>
     </used-plugins>
     <used-behaviors>
+        <behavior author="Scirra" id="Bullet" version="1">Bullet</behavior>
         <behavior author="Scirra" id="EightDir" version="1">8 Direction</behavior>
         <behavior author="Scirra" id="LOS" version="1">Line Of Sight</behavior>
         <behavior author="Scirra" id="Pathfinding" version="1">Pathfinding</behavior>
+        <behavior author="Scirra" id="solid" version="1">Solid</behavior>
     </used-behaviors>
     <used-effects />
     <configurations>
@@ -26,14 +31,14 @@
         <width>854</width>
         <height>480</height>
     </window-size>
-    <pixel-rounding>0</pixel-rounding>
+    <pixel-rounding>1</pixel-rounding>
     <preview-effects>1</preview-effects>
     <use-loader-layout>0</use-loader-layout>
     <configuration-settings>
         <prop name="Clear background">Yes</prop>
         <prop name="Downscaling">Medium quality</prop>
         <prop name="Enable WebGL">On</prop>
-        <prop name="Fullscreen in browser">Letterbox scale</prop>
+        <prop name="Fullscreen in browser">Letterbox integer scale</prop>
         <prop name="Fullscreen scaling">High quality</prop>
         <prop name="Loader style">Progress bar &amp; logo</prop>
         <prop name="Orientations">Any</prop>
@@ -41,20 +46,40 @@
         <prop name="Physics engine">Box2D web</prop>
         <prop name="Preload sounds">Yes</prop>
         <prop name="Preview browser">(default)</prop>
-        <prop name="Sampling">Linear</prop>
+        <prop name="Sampling">Point</prop>
         <prop name="Use high-DPI display">Yes</prop>
     </configuration-settings>
     <object-folder expanded="1">
         <object-type name="Player" sid="1485569278796415">
             <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="Health" sid="6516974986284029" type="number" />
+                <instance-variable name="Score" sid="9999098513763488" type="number" />
+                <instance-variable name="Combo" sid="9117728972079729" type="number" />
+                <instance-variable name="Damage" sid="2410018931567206" type="number" />
+                <instance-variable name="PowerUp" sid="3089083116193254" type="boolean" />
+            </instance-variables>
             <behaviors>
                 <behavior-type name="8Direction" sid="654591441439874">
                     <behavior id="EightDir" />
                 </behavior-type>
+                <behavior-type name="LineOfSight" sid="8326126621583594">
+                    <behavior id="LOS" />
+                </behavior-type>
+                <behavior-type name="LineOfSight2" sid="8053300854532507">
+                    <behavior id="LOS" />
+                </behavior-type>
             </behaviors>
+            <container>
+                <type>Player</type>
+                <type>PlayerLight</type>
+            </container>
             <animation-folder expanded="1">
                 <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="5238679843058154" speed="5">
                     <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\samsung\Documents\Proyectos\vidya-phoenix\phoenixclone\Assets\Sprites\bloque_enemigo.png" />
+                </animation>
+                <animation framecount="1" loop="0" name="Hit" pingpong="0" repeatcount="1" repeatto="0" sid="9197384791401738" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\samsung\Documents\Proyectos\vidya-protojuego\Files\PlayerHit.png" />
                 </animation>
             </animation-folder>
         </object-type>
@@ -63,6 +88,11 @@
         </object-type>
         <object-type name="BigEnemy" sid="1094665193579575">
             <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="Health" sid="4866631436121843" type="number" />
+                <instance-variable name="TimesHit" sid="1020757170571117" type="number" />
+                <instance-variable name="Following" sid="5526360083503545" type="boolean" />
+            </instance-variables>
             <behaviors>
                 <behavior-type name="Pathfinding" sid="2697012422782165">
                     <behavior id="Pathfinding" />
@@ -70,18 +100,165 @@
                 <behavior-type name="LineOfSight" sid="4384582571238313">
                     <behavior id="LOS" />
                 </behavior-type>
+                <behavior-type name="Solid" sid="5034739916490212">
+                    <behavior id="solid" />
+                </behavior-type>
             </behaviors>
             <animation-folder expanded="1">
                 <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="908699630045448" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\samsung\Documents\Proyectos\vidya-phoenix\phoenixclone\Assets\Sprites\bloque_nave.png" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\samsung\Documents\Proyectos\vidya-phoenix\phoenixclone\Assets\Sprites\bloque_nave.png">
+                        <image-point name="Behind" x="-0.108333" y="0.505556" />
+                    </frame>
+                </animation>
+                <animation framecount="1" loop="0" name="Hit" pingpong="0" repeatcount="1" repeatto="0" sid="3828414181020015" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\samsung\Documents\Proyectos\vidya-protojuego\Files\BigEnemyHit.png" />
+                </animation>
+                <animation framecount="1" loop="0" name="Angry" pingpong="0" repeatcount="1" repeatto="0" sid="100914425524507" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+                <animation framecount="1" loop="0" name="Frozen" pingpong="0" repeatcount="1" repeatto="0" sid="8394922847883948" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\samsung\Documents\Proyectos\vidya-protojuego\Files\BigEnemyFrozen.png" />
                 </animation>
             </animation-folder>
         </object-type>
         <object-type name="LittleEnemy" sid="6043847797377755">
             <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="Health" sid="4659936675173017" type="number" />
+                <instance-variable name="Worried" sid="5463116212334403" type="boolean" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="Pathfinding" sid="4165575724293309">
+                    <behavior id="Pathfinding" />
+                </behavior-type>
+                <behavior-type name="LineOfSight" sid="8529794183190882">
+                    <behavior id="LOS" />
+                </behavior-type>
+            </behaviors>
             <animation-folder expanded="1">
                 <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="4138118142967213" speed="5">
                     <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\samsung\Documents\Proyectos\vidya-phoenix\phoenixclone\Assets\Sprites\bloque_nave.png" />
+                </animation>
+                <animation framecount="1" loop="0" name="Hit" pingpong="0" repeatcount="1" repeatto="0" sid="8437202347406338" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\samsung\Documents\Proyectos\vidya-protojuego\Files\LittleEnemyHit.png" />
+                </animation>
+                <animation framecount="1" loop="0" name="Worried" pingpong="0" repeatcount="1" repeatto="0" sid="3254610777786747" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+                <animation framecount="1" loop="0" name="Frozen" pingpong="0" repeatcount="1" repeatto="0" sid="9548786572635949" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\samsung\Documents\Proyectos\vidya-protojuego\Files\LittleEnemyFrozen.png" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="PlayerLight" sid="4150994691219715">
+            <plugin id="Sprite" />
+            <container>
+                <type>Player</type>
+                <type>PlayerLight</type>
+            </container>
+            <animation-folder expanded="1">
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="9741669664738955" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\samsung\Documents\Proyectos\vidya-protojuego\Files\light.png">
+                        <collision-poly>
+                            <point x="0.305" y="0.305" />
+                            <point x="0.5" y="0.22" />
+                            <point x="0.69" y="0.31" />
+                            <point x="0.765" y="0.5" />
+                            <point x="0.68" y="0.68" />
+                            <point x="0.5" y="0.76" />
+                            <point x="0.315" y="0.685" />
+                            <point x="0.225" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Tilemap" sid="94910521442183">
+            <plugin id="Tilemap" />
+            <texture />
+            <tiles />
+        </object-type>
+        <object-type name="Tilemap2" sid="969470960523035">
+            <plugin id="Tilemap" />
+            <instance-variables>
+                <instance-variable name="Health" sid="7568594605202534" type="number" />
+            </instance-variables>
+            <texture original-source="C:\Users\samsung\Documents\Proyectos\vidya-protojuego\Files\light.png" />
+            <tiles />
+        </object-type>
+        <object-type name="PlayerBullet" sid="1942921587365507">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Bullet" sid="9730386740845017">
+                    <behavior id="Bullet" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder expanded="1">
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="3592933908618223" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Keyboard" sid="7988565275307107">
+            <plugin id="Keyboard" />
+        </object-type>
+        <object-type name="EnemyBullet" sid="7893989241998657">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Bullet" sid="5131414907890311">
+                    <behavior id="Bullet" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder expanded="1">
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="1135866015450444" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="HealthText" sid="3918572922365781">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="ComboLabel" sid="5652598721280321">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="ComboNumber" sid="1727891628188089">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="ScoreNumber" sid="5437860431527821">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="ScoreLabel" sid="7342647537627149">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="HealthBar" sid="9493359066667206">
+            <plugin id="Sprite" />
+            <animation-folder expanded="1">
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="1598869929287537" speed="5">
+                    <frame duration="1" hotspotX="0" hotspotY="0.56" />
+                </animation>
+                <animation framecount="1" loop="0" name="AlmostDead" pingpong="0" repeatcount="1" repeatto="0" sid="2745931768931554" speed="5">
+                    <frame duration="1" hotspotX="0" hotspotY="0.56" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="PowerUp" sid="4626718336882569">
+            <plugin id="Sprite" />
+            <animation-folder expanded="1">
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="3169057520684492" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="PlayerCannon" sid="517190458365447">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Bullet" sid="9691713704597425">
+                    <behavior id="Bullet" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder expanded="1">
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="1443193533703724" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
                 </animation>
             </animation-folder>
         </object-type>
@@ -95,6 +272,7 @@
     </event-folder>
     <global-instances>
         <global-instance type="Mouse" uid="1" />
+        <global-instance type="Keyboard" uid="8" />
     </global-instances>
     <sounds-folder expanded="1" />
     <music-folder expanded="1" />

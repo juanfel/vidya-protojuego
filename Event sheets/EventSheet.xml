@@ -19,8 +19,20 @@
                             <param id="0" name="X">Player.X</param>
                             <param id="1" name="Y">Player.Y</param>
                         </action>
-                        <action id="-16" name="Set opacity" sid="9746402510853388" type="Player">
+                        <action disabled="1" id="-16" name="Set opacity" sid="9746402510853388" type="Player">
                             <param id="0" name="Opacity">50</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="4463435997684268">
+                    <conditions>
+                        <condition behavior="Pathfinding" id="1" name="On failed to find path" sid="1032822112377696" type="BigEnemy" />
+                        <condition behavior="Pathfinding" id="5" name="On arrived" sid="1714554608378981" type="BigEnemy" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="810512830506259" type="BigEnemy">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">1</param>
                         </action>
                     </actions>
                 </event-block>
@@ -30,9 +42,738 @@
                     </conditions>
                     <actions>
                         <action behavior="Pathfinding" id="1" name="Move along path" sid="7925667074420578" type="BigEnemy" />
+                        <action id="4" name="Set animation" sid="2893770133045948" type="BigEnemy">
+                            <param id="0" name="Animation">&quot;Angry&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="2634403761258477" type="BigEnemy">
+                            <param id="0" name="Instance variable">Following</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
                     </actions>
                 </event-block>
             </sub-events>
         </event-group>
+        <event-block sid="7578125592791486">
+            <conditions>
+                <condition behavior="LineOfSight" id="0" name="Has LOS to object" sid="6479146281000255" type="Player">
+                    <param id="0" name="Object">LittleEnemy</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-16" name="Set opacity" sid="4466578264644651" type="LittleEnemy">
+                    <param id="0" name="Opacity">60</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="9043685501322278">
+            <conditions>
+                <condition id="-22" name="Else" sid="8625849531335655" type="System" />
+            </conditions>
+            <actions>
+                <action id="-16" name="Set opacity" sid="3259519565313907" type="LittleEnemy">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="4819797848496702">
+            <conditions>
+                <condition behavior="LineOfSight" id="0" name="Has LOS to object" sid="9517333966075534" type="Player">
+                    <param id="0" name="Object">LittleEnemy</param>
+                </condition>
+                <condition id="-6" name="Every X seconds" sid="9306647519782418" type="System">
+                    <param id="0" name="Interval (seconds)">1.0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action behavior="Pathfinding" id="0" name="Find path" sid="6088244547612371" type="LittleEnemy">
+                    <param id="0" name="X">BigEnemy.ImagePointX(&quot;behind&quot;)</param>
+                    <param id="1" name="Y">BigEnemy.ImagePointY(&quot;behind&quot;)</param>
+                </action>
+                <action id="-13" name="Set boolean" sid="1059315640030427" type="LittleEnemy">
+                    <param id="0" name="Instance variable">Worried</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="3544829478913852">
+            <conditions>
+                <condition id="-22" name="Else" sid="1817960997096832" type="System" />
+                <condition id="-6" name="Every X seconds" sid="6243624047104574" type="System">
+                    <param id="0" name="Interval (seconds)">1.0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action behavior="Pathfinding" id="0" name="Find path" sid="4773905503462721" type="LittleEnemy">
+                    <param id="0" name="X">Player.X</param>
+                    <param id="1" name="Y">Player.Y</param>
+                </action>
+                <action id="-13" name="Set boolean" sid="3274368282861118" type="LittleEnemy">
+                    <param id="0" name="Instance variable">Worried</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="6899591447179932">
+            <conditions>
+                <condition behavior="Pathfinding" id="0" name="On path found" sid="2974041874621035" type="LittleEnemy" />
+            </conditions>
+            <actions>
+                <action behavior="Pathfinding" id="1" name="Move along path" sid="9304692172870149" type="LittleEnemy" />
+            </actions>
+            <sub-events>
+                <event-block sid="6218264074063765">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="9204577254605437" type="LittleEnemy">
+                            <param id="0" name="Instance variable">Worried</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="7991465659076079" type="LittleEnemy">
+                            <param id="0" name="Animation">&quot;Worried&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9472970437650203">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="1765802934969351" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="8950540585654217" type="LittleEnemy">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="5049218057815437">
+            <conditions>
+                <condition id="-18" name="On created" sid="3151546056660134" type="BigEnemy" />
+            </conditions>
+            <actions>
+                <action behavior="Pathfinding" id="5" name="Add obstacle" sid="7398450071099569" type="LittleEnemy">
+                    <param id="0" name="Obstacle">BigEnemy</param>
+                </action>
+                <action behavior="Pathfinding" id="5" name="Add obstacle" sid="5359147391678295" type="LittleEnemy">
+                    <param id="0" name="Obstacle">LittleEnemy</param>
+                </action>
+                <action behavior="LineOfSight" id="2" name="Add obstacle" sid="948632922373797" type="Player">
+                    <param id="0" name="Obstacle">BigEnemy</param>
+                </action>
+                <action behavior="Pathfinding" id="4" name="Regenerate obstacle map" sid="9756817091158468" type="BigEnemy" />
+            </actions>
+        </event-block>
+        <comment>Ve que si el jugador tiene LOS en cada tile</comment>
+        <event-block sid="9399403614026278">
+            <conditions>
+                <condition id="-10" name="For" sid="8548914165831971" type="System">
+                    <param id="0" name="Name">&quot;X&quot;</param>
+                    <param id="1" name="Start index">0</param>
+                    <param id="2" name="End index">Tilemap.PositionToTileX(1708)</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="7260472664684965">
+                    <conditions>
+                        <condition id="-10" name="For" sid="7035280463871214" type="System">
+                            <param id="0" name="Name">&quot;Y&quot;</param>
+                            <param id="1" name="Start index">0</param>
+                            <param id="2" name="End index">Tilemap.PositionToTileY(960)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="176502730837635">
+                            <conditions>
+                                <condition behavior="LineOfSight" id="1" name="Has LOS to position" sid="792808355394055" type="Player">
+                                    <param id="0" name="X">Tilemap.TileToPositionX(loopindex(&quot;X&quot;))</param>
+                                    <param id="1" name="Y">Tilemap.TileToPositionY(loopindex(&quot;Y&quot;))</param>
+                                </condition>
+                                <condition behavior="LineOfSight2" id="1" name="Has LOS to position" sid="7328533979941074" type="Player">
+                                    <param id="0" name="X">Tilemap.TileToPositionX(loopindex(&quot;X&quot;))</param>
+                                    <param id="1" name="Y">Tilemap.TileToPositionY(loopindex(&quot;Y&quot;))</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set tile" sid="3809413627491692" type="Tilemap">
+                                    <param id="0" name="Tile X">loopindex(&quot;X&quot;)</param>
+                                    <param id="1" name="Tile Y">loopindex(&quot;Y&quot;)</param>
+                                    <param id="2" name="Tile">9</param>
+                                    <param id="3" name="State">0</param>
+                                </action>
+                                <action disabled="1" id="1" name="Set tile" sid="9587480909187406" type="Tilemap2">
+                                    <param id="0" name="Tile X">loopindex(&quot;X&quot;)</param>
+                                    <param id="1" name="Tile Y">loopindex(&quot;Y&quot;)</param>
+                                    <param id="2" name="Tile">21</param>
+                                    <param id="3" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="8182417376207714">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="9866546955663963" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Erase tile" sid="1297815166607317" type="Tilemap">
+                                    <param id="0" name="Tile X">loopindex(&quot;X&quot;)</param>
+                                    <param id="1" name="Tile Y">loopindex(&quot;Y&quot;)</param>
+                                </action>
+                                <action disabled="1" id="0" name="Erase tile" sid="2770703461226521" type="Tilemap2">
+                                    <param id="0" name="Tile X">loopindex(&quot;X&quot;)</param>
+                                    <param id="1" name="Tile Y">loopindex(&quot;Y&quot;)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="9399078297449926">
+                            <conditions />
+                            <actions />
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="7080852621337943">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="9650924714129741" type="LittleEnemy">
+                    <param id="0" name="Object">Tilemap</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action behavior="Pathfinding" id="11" name="Add path cost" sid="22807917031307" type="LittleEnemy">
+                    <param id="0" name="Object">Tilemap</param>
+                    <param id="1" name="Cost">50</param>
+                </action>
+                <action behavior="Pathfinding" id="4" name="Regenerate obstacle map" sid="1818215234825781" type="LittleEnemy" />
+            </actions>
+        </event-block>
+        <event-block any="1" sid="2401288143420255">
+            <conditions>
+                <condition id="-8" name="Compare two values" sid="7116852901218195" type="System">
+                    <param id="0" name="First value">distance(Player.X,Player.Y,LittleEnemy.X,LittleEnemy.Y)</param>
+                    <param id="1" name="Comparison">2</param>
+                    <param id="2" name="Second value">100</param>
+                </condition>
+                <condition id="0" name="On collision with another object" sid="8047508653668014" type="LittleEnemy">
+                    <param id="0" name="Object">Player</param>
+                </condition>
+                <condition id="0" name="On collision with another object" sid="4923326476609832" type="LittleEnemy">
+                    <param id="0" name="Object">BigEnemy</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action behavior="Pathfinding" id="2" name="Stop" sid="5601899516355168" type="LittleEnemy" />
+            </actions>
+        </event-block>
+        <event-block sid="910445747395808">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="9286210266623259" type="BigEnemy">
+                    <param id="0" name="Object">Player</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action behavior="Pathfinding" id="2" name="Stop" sid="2834273177927321" type="BigEnemy" />
+            </actions>
+        </event-block>
+        <event-block disabled="1" sid="6644274983017605">
+            <conditions>
+                <condition id="-1" name="Every tick" sid="7814602300809438" type="System" />
+            </conditions>
+            <actions>
+                <action id="-4" name="Set position to another object" sid="4623407524620523" type="Tilemap2">
+                    <param id="0" name="Object">Player</param>
+                    <param id="1" name="Image point (optional)">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block any="1" sid="6222286528268384">
+            <conditions>
+                <condition id="0" name="On click" sid="6978674590895088" type="Mouse">
+                    <param id="0" name="Mouse button">0</param>
+                    <param id="1" name="Click type">0</param>
+                </condition>
+                <condition id="0" name="On key pressed" sid="7150686756521369" type="Keyboard">
+                    <param id="0" name="Key">17 (Ctrl)</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="9128703683180918">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="2675535701466499" type="System">
+                            <param id="0" name="Interval (seconds)">0.5</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="9459925056605654">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="1946829635670663" type="Player">
+                                    <param id="0" name="Instance variable">PowerUp</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="243911612170639" type="System">
+                                    <param id="0" name="Object to create">PlayerCannon</param>
+                                    <param id="1" name="Layer">0</param>
+                                    <param id="2" name="X">Player.X</param>
+                                    <param id="3" name="Y">Player.Y</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="9072343384668052" type="PlayerCannon">
+                                    <param id="0" name="Angle">Player.Angle</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="7877273255550873" type="Player">
+                                    <param id="0" name="Instance variable">PowerUp</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="7719069119657736">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="5331800675849532" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="9865408716367819" type="System">
+                                    <param id="0" name="Object to create">PlayerBullet</param>
+                                    <param id="1" name="Layer">0</param>
+                                    <param id="2" name="X">Player.X</param>
+                                    <param id="3" name="Y">Player.Y</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="4869392030810684" type="PlayerBullet">
+                                    <param id="0" name="Angle">Player.Angle</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="441304770231277">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="5983516261552913" type="PlayerBullet">
+                    <param id="0" name="Object">BigEnemy</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="4987853936926857" type="PlayerBullet" />
+                <action id="-11" name="Add to" sid="3210684751892767" type="BigEnemy">
+                    <param id="0" name="Instance variable">TimesHit</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+                <action id="-7" name="Set size" sid="2934374891366045" type="BigEnemy">
+                    <param id="0" name="Width">BigEnemy.Width+5*BigEnemy.TimesHit</param>
+                    <param id="1" name="Height">BigEnemy.Height + 5*BigEnemy.TimesHit</param>
+                </action>
+                <action id="-12" name="Subtract from" sid="4468355398594342" type="BigEnemy">
+                    <param id="0" name="Instance variable">Health</param>
+                    <param id="1" name="Value">Player.Damage</param>
+                </action>
+                <action id="4" name="Set animation" sid="1145498468172076" type="BigEnemy">
+                    <param id="0" name="Animation">&quot;Hit&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="2890584418710736" type="System">
+                    <param id="0" name="Seconds">0.2</param>
+                </action>
+                <action id="4" name="Set animation" sid="234747481174954" type="BigEnemy">
+                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="6398408854433221">
+                    <conditions>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="2236452330723528" type="BigEnemy">
+                            <param id="0" name="Instance variable">Following</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-20" name="Rotate toward angle" sid="313766238442526" type="BigEnemy">
+                            <param id="0" name="Degrees">10</param>
+                            <param id="1" name="Angle">PlayerBullet.Angle</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="6876470821137814">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="5468249777511526" type="PlayerBullet">
+                    <param id="0" name="Object">LittleEnemy</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="5669658485075699" type="PlayerBullet" />
+                <action id="-12" name="Subtract from" sid="7543913561703727" type="LittleEnemy">
+                    <param id="0" name="Instance variable">Health</param>
+                    <param id="1" name="Value">Player.Damage</param>
+                </action>
+                <action id="4" name="Set animation" sid="2448358582916342" type="LittleEnemy">
+                    <param id="0" name="Animation">&quot;Hit&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="6854831764324242" type="System">
+                    <param id="0" name="Seconds">0.2</param>
+                </action>
+                <action id="4" name="Set animation" sid="712198172621652" type="LittleEnemy">
+                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="9444201388523483">
+            <conditions>
+                <condition id="-7" name="Compare instance variable" sid="7161500207897924" type="BigEnemy">
+                    <param id="0" name="Instance variable">Health</param>
+                    <param id="1" name="Comparison">3</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="2181156263747415" type="BigEnemy" />
+                <action id="-11" name="Add to" sid="4670518475220677" type="Player">
+                    <param id="0" name="Instance variable">Score</param>
+                    <param id="1" name="Value">400*Player.Combo</param>
+                </action>
+                <action id="0" name="Set text" sid="36538625141414" type="ScoreNumber">
+                    <param id="0" name="Text">Player.Score</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="4310158395719815">
+            <conditions>
+                <condition id="-7" name="Compare instance variable" sid="4809423733901003" type="LittleEnemy">
+                    <param id="0" name="Instance variable">Health</param>
+                    <param id="1" name="Comparison">3</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="5567222996190926" type="LittleEnemy" />
+                <action id="-11" name="Add to" sid="2935283582413296" type="Player">
+                    <param id="0" name="Instance variable">Score</param>
+                    <param id="1" name="Value">100*Player.Combo</param>
+                </action>
+                <action id="0" name="Set text" sid="1971392147148587" type="ScoreNumber">
+                    <param id="0" name="Text">Player.Score</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="1209979471656836">
+            <conditions>
+                <condition behavior="LineOfSight" id="0" name="Has LOS to object" sid="6113081092747493" type="LittleEnemy">
+                    <param id="0" name="Object">Player</param>
+                </condition>
+                <condition id="-6" name="Every X seconds" sid="6448543936367548" type="System">
+                    <param id="0" name="Interval (seconds)">1.0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-3" name="Create object" sid="1685486602265967" type="System">
+                    <param id="0" name="Object to create">EnemyBullet</param>
+                    <param id="1" name="Layer">0</param>
+                    <param id="2" name="X">LittleEnemy.X</param>
+                    <param id="3" name="Y">LittleEnemy.Y</param>
+                </action>
+                <action behavior="Bullet" id="3" name="Set angle of motion" sid="8575806465050801" type="EnemyBullet">
+                    <param id="0" name="Angle">LittleEnemy.Angle</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="5923110493393354">
+            <conditions>
+                <condition id="-18" name="On created" sid="7360640589069081" type="LittleEnemy" />
+            </conditions>
+            <actions>
+                <action behavior="Pathfinding" id="5" name="Add obstacle" sid="9737898080845224" type="LittleEnemy">
+                    <param id="0" name="Obstacle">Player</param>
+                </action>
+                <action behavior="Pathfinding" id="5" name="Add obstacle" sid="3712203441351454" type="LittleEnemy">
+                    <param id="0" name="Obstacle">BigEnemy</param>
+                </action>
+                <action behavior="Pathfinding" id="4" name="Regenerate obstacle map" sid="6192522128968894" type="LittleEnemy" />
+            </actions>
+        </event-block>
+        <event-block any="1" collapsed="1" sid="8813925915401017">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="7292993438309821" type="BigEnemy">
+                    <param id="0" name="Object">Player</param>
+                </condition>
+                <condition id="0" name="On collision with another object" sid="6812047961679642" type="LittleEnemy">
+                    <param id="0" name="Object">Player</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-12" name="Subtract from" sid="5829590237162095" type="Player">
+                    <param id="0" name="Instance variable">Health</param>
+                    <param id="1" name="Value">100</param>
+                </action>
+                <action id="4" name="Set animation" sid="6130966905933373" type="Player">
+                    <param id="0" name="Animation">&quot;Hit&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+                <action id="11" name="Set collisions enabled" sid="7520875061463099" type="Player">
+                    <param id="0" name="Collisions">0</param>
+                </action>
+                <action id="-16" name="Wait" sid="9816454192502618" type="System">
+                    <param id="0" name="Seconds">0.1</param>
+                </action>
+                <action id="4" name="Set animation" sid="1468455907291853" type="Player">
+                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+                <action id="11" name="Set collisions enabled" sid="3713763757379157" type="Player">
+                    <param id="0" name="Collisions">1</param>
+                </action>
+                <action id="-5" name="Set width" sid="4864935814134409" type="HealthBar">
+                    <param id="0" name="Width">(Player.Health/1000)*HealthBar.Width</param>
+                </action>
+                <action id="-10" name="Set value" sid="7100876571682806" type="Player">
+                    <param id="0" name="Instance variable">Combo</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="0" name="Set text" sid="3312222780366052" type="ComboNumber">
+                    <param id="0" name="Text">Player.Combo</param>
+                </action>
+                <action id="3" name="Set font size" sid="7952362636716266" type="ComboNumber">
+                    <param id="0" name="Size (pt)">12</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="5646511633626443">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="1956600827718222" type="Player">
+                            <param id="0" name="Instance variable">Health</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="1463546248399003" type="Player" />
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block any="1" sid="181917573735824">
+            <conditions>
+                <condition id="-19" name="On destroyed" sid="638968825950814" type="BigEnemy" />
+                <condition id="-19" name="On destroyed" sid="2450819933266324" type="LittleEnemy" />
+            </conditions>
+            <actions>
+                <action id="-11" name="Add to" sid="2125522254433656" type="Player">
+                    <param id="0" name="Instance variable">Combo</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+                <action id="0" name="Set text" sid="9630747609823236" type="ComboNumber">
+                    <param id="0" name="Text">Player.Combo</param>
+                </action>
+                <action id="3" name="Set font size" sid="8176319769319592" type="ComboNumber">
+                    <param id="0" name="Size (pt)">ComboNumber.FaceSize + 1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="678560171173936">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="7752691964769812" type="System" />
+            </conditions>
+            <actions>
+                <action id="0" name="Set text" sid="1202604357389806" type="ComboNumber">
+                    <param id="0" name="Text">Player.Combo</param>
+                </action>
+                <action id="0" name="Set text" sid="8904103828305566" type="ScoreNumber">
+                    <param id="0" name="Text">Player.Score</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="9523393933354298">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="9508207246125728" type="Keyboard">
+                    <param id="0" name="Key">82 (R)</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-26" name="Restart layout" sid="5686932588348286" type="System" />
+            </actions>
+        </event-block>
+        <event-block sid="4640803338407729">
+            <conditions>
+                <condition id="-7" name="Compare instance variable" sid="1295448011131734" type="Player">
+                    <param id="0" name="Instance variable">Health</param>
+                    <param id="1" name="Comparison">3</param>
+                    <param id="2" name="Value">500</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="4" name="Set animation" sid="4314869071069656" type="HealthBar">
+                    <param id="0" name="Animation">&quot;AlmostDead&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="5096430473955402">
+            <conditions>
+                <condition behavior="Pathfinding" id="1" name="On failed to find path" sid="5221221232391554" type="LittleEnemy" />
+            </conditions>
+            <actions>
+                <action behavior="Pathfinding" id="0" name="Find path" sid="2291265166785987" type="LittleEnemy">
+                    <param id="0" name="X">random(0,WindowWidth)</param>
+                    <param id="1" name="Y">random(0,WindowHeight)</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="6946019719340556">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="6150897395297313" type="EnemyBullet">
+                    <param id="0" name="Object">Player</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="4248873631927001" type="EnemyBullet" />
+                <action id="-12" name="Subtract from" sid="9979794524518666" type="Player">
+                    <param id="0" name="Instance variable">Health</param>
+                    <param id="1" name="Value">100</param>
+                </action>
+                <action id="4" name="Set animation" sid="8493648321523" type="Player">
+                    <param id="0" name="Animation">&quot;Hit&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+                <action id="11" name="Set collisions enabled" sid="7424481942015332" type="Player">
+                    <param id="0" name="Collisions">0</param>
+                </action>
+                <action id="-16" name="Wait" sid="7853192014687568" type="System">
+                    <param id="0" name="Seconds">0.1</param>
+                </action>
+                <action id="4" name="Set animation" sid="7405568828516887" type="Player">
+                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+                <action id="11" name="Set collisions enabled" sid="3986864104952188" type="Player">
+                    <param id="0" name="Collisions">1</param>
+                </action>
+                <action id="-5" name="Set width" sid="915524571614634" type="HealthBar">
+                    <param id="0" name="Width">(Player.Health/1000)*HealthBar.Width</param>
+                </action>
+                <action id="-10" name="Set value" sid="6610070459230041" type="Player">
+                    <param id="0" name="Instance variable">Combo</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="0" name="Set text" sid="4296183858448562" type="ComboNumber">
+                    <param id="0" name="Text">Player.Combo</param>
+                </action>
+                <action id="3" name="Set font size" sid="9620919717898099" type="ComboNumber">
+                    <param id="0" name="Size (pt)">12</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="973342653000964">
+            <conditions>
+                <condition behavior="LineOfSight" id="0" name="Has LOS to object" sid="9373746766743994" type="Player">
+                    <param id="0" name="Object">PowerUp</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-16" name="Set opacity" sid="488484602610613" type="PowerUp">
+                    <param id="0" name="Opacity">100</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="3809297860148114">
+            <conditions>
+                <condition id="-22" name="Else" sid="7410844631350282" type="System" />
+            </conditions>
+            <actions>
+                <action id="-16" name="Set opacity" sid="883599637411964" type="PowerUp">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="945692537966004">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="450015918075174" type="Player">
+                    <param id="0" name="Object">PowerUp</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-13" name="Set boolean" sid="5741065313501069" type="Player">
+                    <param id="0" name="Instance variable">PowerUp</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="2683744549298347">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="5998915261397247" type="PlayerCannon">
+                    <param id="0" name="Object">BigEnemy</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-11" name="Add to" sid="3028028736314094" type="BigEnemy">
+                    <param id="0" name="Instance variable">TimesHit</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+                <action id="-7" name="Set size" sid="8986174396909481" type="BigEnemy">
+                    <param id="0" name="Width">BigEnemy.Width+5*BigEnemy.TimesHit</param>
+                    <param id="1" name="Height">BigEnemy.Height + 5*BigEnemy.TimesHit</param>
+                </action>
+                <action id="-12" name="Subtract from" sid="4455812383889011" type="BigEnemy">
+                    <param id="0" name="Instance variable">Health</param>
+                    <param id="1" name="Value">Player.Damage</param>
+                </action>
+                <action id="4" name="Set animation" sid="224121274445324" type="BigEnemy">
+                    <param id="0" name="Animation">&quot;Frozen&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+                <action behavior="Pathfinding" id="2" name="Stop" sid="7235686091866903" type="BigEnemy" />
+                <action id="-16" name="Wait" sid="7457357125061443" type="System">
+                    <param id="0" name="Seconds">0.2</param>
+                </action>
+                <action id="4" name="Set animation" sid="8159548073796843" type="BigEnemy">
+                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+                <action behavior="Pathfinding" id="1" name="Move along path" sid="1478165043312754" type="BigEnemy" />
+            </actions>
+            <sub-events>
+                <event-block sid="7026711287247727">
+                    <conditions>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="2388254283057959" type="BigEnemy">
+                            <param id="0" name="Instance variable">Following</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-20" name="Rotate toward angle" sid="7085918137626968" type="BigEnemy">
+                            <param id="0" name="Degrees">10</param>
+                            <param id="1" name="Angle">PlayerBullet.Angle</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="1925977611995082">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="4483149402347357" type="PlayerBullet">
+                    <param id="0" name="Object">LittleEnemy</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-12" name="Subtract from" sid="6671705340803282" type="LittleEnemy">
+                    <param id="0" name="Instance variable">Health</param>
+                    <param id="1" name="Value">Player.Damage</param>
+                </action>
+                <action id="4" name="Set animation" sid="9669490537060894" type="LittleEnemy">
+                    <param id="0" name="Animation">&quot;Frozen&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="3560974119424801" type="System">
+                    <param id="0" name="Seconds">0.2</param>
+                </action>
+                <action id="4" name="Set animation" sid="9625664427394176" type="LittleEnemy">
+                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+            </actions>
+        </event-block>
     </events>
 </c2eventsheet>
