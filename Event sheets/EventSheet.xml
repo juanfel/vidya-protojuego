@@ -653,7 +653,7 @@
                     <param id="0" name="Collisions">1</param>
                 </action>
                 <action id="-5" name="Set width" sid="915524571614634" type="HealthBar">
-                    <param id="0" name="Width">(Player.Health/1000)*HealthBar.Width</param>
+                    <param id="0" name="Width">(Player.Health/1000)*HealthBar.MaxWidth</param>
                 </action>
                 <action id="-10" name="Set value" sid="6610070459230041" type="Player">
                     <param id="0" name="Instance variable">Combo</param>
@@ -727,7 +727,7 @@
                 </action>
                 <action behavior="Pathfinding" id="2" name="Stop" sid="7235686091866903" type="BigEnemy" />
                 <action id="-16" name="Wait" sid="7457357125061443" type="System">
-                    <param id="0" name="Seconds">0.2</param>
+                    <param id="0" name="Seconds">1</param>
                 </action>
                 <action id="4" name="Set animation" sid="8159548073796843" type="BigEnemy">
                     <param id="0" name="Animation">&quot;Default&quot;</param>
@@ -772,6 +772,79 @@
                 <action id="4" name="Set animation" sid="9625664427394176" type="LittleEnemy">
                     <param id="0" name="Animation">&quot;Default&quot;</param>
                     <param id="1" name="From">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="6284761446260028">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="7840615431615239" type="Player">
+                    <param id="0" name="Object">PowerUp2</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="871084102792276" type="PowerUp2" />
+                <action id="-13" name="Set boolean" sid="6412843599768806" type="Player">
+                    <param id="0" name="Instance variable">PowerUp2</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="9568405640058204" type="System">
+                    <param id="0" name="Seconds">3</param>
+                </action>
+                <action id="-13" name="Set boolean" sid="7911686143387076" type="Player">
+                    <param id="0" name="Instance variable">PowerUp2</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="2659903586619196">
+            <conditions>
+                <condition id="-6" name="Every X seconds" sid="8405654771025777" type="System">
+                    <param id="0" name="Interval (seconds)">0.2</param>
+                </condition>
+                <condition id="-8" name="Is boolean instance variable set" sid="9051310437543172" type="Player">
+                    <param id="0" name="Instance variable">PowerUp2</param>
+                </condition>
+                <condition id="-7" name="Compare instance variable" sid="7572695391675707" type="Player">
+                    <param id="0" name="Instance variable">Health</param>
+                    <param id="1" name="Comparison">3</param>
+                    <param id="2" name="Value">1000</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-11" name="Add to" sid="2392589439515782" type="Player">
+                    <param id="0" name="Instance variable">Health</param>
+                    <param id="1" name="Value">100</param>
+                </action>
+                <action id="-5" name="Set width" sid="6204163407603971" type="HealthBar">
+                    <param id="0" name="Width">(Player.Health/1000)*HealthBar.MaxWidth</param>
+                </action>
+                <action id="4" name="Set animation" sid="6564138610758616" type="Player">
+                    <param id="0" name="Animation">&quot;Healing&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="9216130764395028">
+            <conditions>
+                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="551758882047288" type="Player">
+                    <param id="0" name="Instance variable">PowerUp2</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="4" name="Set animation" sid="5020196792402932" type="Player">
+                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="3912114905312999">
+            <conditions>
+                <condition id="-18" name="On created" sid="7173535155456997" type="HealthBar" />
+            </conditions>
+            <actions>
+                <action id="-10" name="Set value" sid="7254349245719046" type="HealthBar">
+                    <param id="0" name="Instance variable">MaxWidth</param>
+                    <param id="1" name="Value">HealthBar.Width</param>
                 </action>
             </actions>
         </event-block>

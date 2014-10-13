@@ -89,6 +89,7 @@
                         <Combo>0</Combo>
                         <Damage>100</Damage>
                         <PowerUp>false</PowerUp>
+                        <PowerUp2>false</PowerUp2>
                     </instance-variables>
                     <behavior-instances>
                         <behavior-instance type="8Direction">
@@ -250,11 +251,33 @@
                     <blend-mode>0</blend-mode>
                     <effect-fallback>0</effect-fallback>
                     <world>
-                        <x>66</x>
-                        <y>500.5</y>
+                        <x>270</x>
+                        <y>413</y>
                         <z>0</z>
                         <width>22</width>
                         <height>19</height>
+                        <depth>0</depth>
+                        <hotspotX>0.5</hotspotX>
+                        <hotspotY>0.5</hotspotY>
+                        <angle>0</angle>
+                        <opacity>1</opacity>
+                    </world>
+                </instance>
+                <instance type="PowerUp2" uid="21">
+                    <properties>
+                        <initial-visibility>Visible</initial-visibility>
+                        <initial-animation>Default</initial-animation>
+                        <initial-frame>0</initial-frame>
+                        <collisions>Enabled</collisions>
+                    </properties>
+                    <blend-mode>0</blend-mode>
+                    <effect-fallback>0</effect-fallback>
+                    <world>
+                        <x>345.5</x>
+                        <y>330</y>
+                        <z>0</z>
+                        <width>26</width>
+                        <height>28</height>
                         <depth>0</depth>
                         <hotspotX>0.5</hotspotX>
                         <hotspotY>0.5</hotspotY>
@@ -713,6 +736,9 @@
                         <initial-frame>0</initial-frame>
                         <collisions>Enabled</collisions>
                     </properties>
+                    <instance-variables>
+                        <MaxWidth>0</MaxWidth>
+                    </instance-variables>
                     <blend-mode>0</blend-mode>
                     <effect-fallback>0</effect-fallback>
                     <world>
